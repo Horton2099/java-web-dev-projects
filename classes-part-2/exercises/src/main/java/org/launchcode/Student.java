@@ -1,5 +1,7 @@
 package org.launchcode;
 
+import org.w3c.dom.ls.LSOutput;
+
 public class Student {
 
     private static int nextStudentId = 1;
@@ -30,20 +32,53 @@ public class Student {
 
 
     //TODO: Uncomment and complete the getGradeLevel method here:
-//    public String getGradeLevel() {
-//        // Determine the grade level of the student based on numberOfCredits
-//    }
+    public static String getGradeLevel(int credits) {
+        if (credits <= 29) {
+            return "freshman";
+        } else if (credits <= 59) {
+            return "sophomore";
+        } else if (credits <= 89) {
+            return "junior";
+        } else {
+            return "senior";
+        }
+        // Determine the grade level of the student based on numberOfCredits
+    }
 
     // TODO: Complete the addGrade method.
     public void addGrade(int courseCredits, double grade) {
         // Update the appropriate fields: numberOfCredits, gpa
+        double totalQualityScore = this.gpa * this.numberOfCredits;
+        totalQualityScore += courseCredits * grade;
+        this.numberOfCredits += courseCredits;
+        this.gpa = totalQualityScore/this.numberOfCredits;
+
     }
 
     // TODO: Add your custom 'toString' method here. Make sure it returns a well-formatted String rather
     //  than just the class fields.
+    public String toString() {
+        return name + " (Credits: " + numberOfCredits + ", GPA: " + gpa + ")";
+    }
 
     // TODO: Add your custom 'equals' method here. Consider which fields should match in order to call two
     //  Student objects equal.
+    public boolean equals(Object toBeCompared) {
+
+        if (toBeCompared == this) {
+            return true;
+        }
+
+        if (toBeCompared == null) {
+            return false;
+        }
+
+        if (toBeCompared.getClass() != getClass()) {
+            return false;
+        }
+        Student theStudent = (Student) toBeCompared;
+        return theStudent.getStudentId() == getStudentId();
+    }
 
     public String getName() {
         return name;
