@@ -15,13 +15,32 @@ public class Main {
         // Test out your CheckFileExtension() function!
     }
 
-    public static void Divide(int x, int y)
+    public static int Divide(int x, int y)
     {
-        // Write code here!
+        if (y == 0) {
+            try {
+            throw new ArithmeticException("Y cannot equal zero.");
+            } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+    }
+        return x / y;
     }
 
     public static int CheckFileExtension(String fileName)
     {
-        // Write code here!
+        int currentScore = 0;
+        if (fileName.endsWith(".java")) {
+            currentScore += 1;
+        }
+        if(fileName.isBlank()){
+            currentScore -= 1;
+            try {
+                throw new IllegalArgumentException("Illegal File Extension");
+            } catch (IllegalArgumentException e){
+                e.printStackTrace();
+            }
+        }
+        return currentScore;
     }
 }
